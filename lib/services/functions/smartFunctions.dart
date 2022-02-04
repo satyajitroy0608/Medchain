@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/services.dart';
 import 'package:medchain/utils/constants.dart';
 import 'package:web3dart/web3dart.dart';
@@ -39,9 +41,17 @@ Future<String> submit(
   return result;
 }
 
-Future<String> addDoctor(
+Future<String> addDoctorInfo(
     String doctorAddress, String info, Web3Client ethClient) async {
-  var response = await submit("addDoctor", [doctorAddress, info], ethClient);
+  var response = await submit(
+      "addDrInfo", [EthereumAddress.fromHex(doctorAddress), info], ethClient);
   print('Doctor Added');
+  return response;
+}
+
+Future<String> addPatient(String patientAddress, Web3Client ethClient) async {
+  var response = await submit(
+      "addPatient", [EthereumAddress.fromHex(patientAddress)], ethClient);
+  print('Patient Added');
   return response;
 }

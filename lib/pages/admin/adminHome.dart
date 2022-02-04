@@ -57,7 +57,14 @@ class _AdminHomeState extends State<AdminHome> {
           ]),
       body: PageView(
         controller: pageController,
-        children: [AllDoctors(), AllPatients()],
+        children: [
+          AllDoctors(
+            ethClient: ethClient!,
+          ),
+          AllPatients(
+            ethClient: ethClient!,
+          )
+        ],
       ),
     );
   }

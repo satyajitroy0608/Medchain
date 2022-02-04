@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:medchain/pages/admin/addDoctor.dart';
 import 'package:medchain/utils/constants.dart';
 import 'package:medchain/widgets/doctorImage.dart';
+import 'package:web3dart/web3dart.dart';
 
 class AllDoctors extends StatefulWidget {
-  const AllDoctors({Key? key}) : super(key: key);
+  final Web3Client ethClient;
+
+  const AllDoctors({Key? key, required this.ethClient}) : super(key: key);
 
   @override
   _AllDoctorsState createState() => _AllDoctorsState();
@@ -77,8 +80,12 @@ class _AllDoctorsState extends State<AllDoctors> {
               width: double.infinity,
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AddDoctor()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddDoctor(
+                                  ethClient: widget.ethClient,
+                                )));
                   },
                   child: Text('Add Doctor')),
             ),

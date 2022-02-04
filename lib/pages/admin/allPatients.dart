@@ -3,9 +3,11 @@ import 'package:medchain/pages/admin/addDoctor.dart';
 import 'package:medchain/pages/admin/addPatient.dart';
 import 'package:medchain/utils/constants.dart';
 import 'package:medchain/widgets/doctorImage.dart';
+import 'package:web3dart/web3dart.dart';
 
 class AllPatients extends StatefulWidget {
-  const AllPatients({Key? key}) : super(key: key);
+  final Web3Client ethClient;
+  const AllPatients({Key? key, required this.ethClient}) : super(key: key);
 
   @override
   _AllPatientsState createState() => _AllPatientsState();
@@ -85,8 +87,11 @@ class _AllPatientsState extends State<AllPatients> {
               width: double.infinity,
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AddPatient()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                AddPatient(ethClient: widget.ethClient)));
                   },
                   child: Text('Add Patient')),
             ),
